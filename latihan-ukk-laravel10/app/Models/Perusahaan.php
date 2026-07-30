@@ -13,10 +13,4 @@ class Perusahaan extends Model
  'nama_pembimbing_industri', 'telepon',
  ];
 
- public function siswa()
-{
- return $this->hasMany(Siswa::class);
 }
-}
-
-
