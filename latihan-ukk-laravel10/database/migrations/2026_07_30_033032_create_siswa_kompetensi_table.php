@@ -12,9 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswa_kompetensi', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+ $table->id();
+ $table->foreignId('siswa_id')->constrained('siswas')->onDelete('cascade');
+ $table->foreignId('kompetensi_id')->constrained('kompetensis')->onDelete('cascade');
+ $table->string('nilai', 5)->nullable(); // contoh: 'B', 'SB', atau angka 0-
+ $table->timestamps();
+});
+
     }
 
     /**
