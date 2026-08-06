@@ -2,46 +2,95 @@
 
 
 @section('title')
-Daftar Perusahaan PKL
+
+{{ $judulHalaman }}
+
 @endsection
 
+
+
+
 @section('content')
+
+
 <h2>
-    Daftar Perusahaan Mitra PKL
+    {{ $judulHalaman }}
 </h2>
+
+
+
+
+<a href="{{ route('siswa.index') }}">
+    Kembali ke Data Siswa
+</a>
+
+
+
+<br><br>
+
+
+
+
 <table border="1" cellpadding="8" cellspacing="0">
+
 
 <thead>
 
 <tr>
 
-<th>
-Nama Perusahaan
-</th>
+<th>No</th>
 
+<th>Nama Perusahaan</th>
 
-<th>
-Bidang Usaha
-</th>
+<th>Bidang Usaha</th>
 
+<th>Jumlah Siswa PKL</th>
 
-<th>
-Aksi
-</th>
+<th>Aksi</th>
+
 
 </tr>
 
+
 </thead>
+
+
+
 <tbody>
-@forelse($perusahaan as $p)
+
+
+
+@forelse($perusahaan as $index => $p)
+
+
+
 <tr>
+
+
+<td>
+    {{ $index + 1 }}
+</td>
+
+
+
 <td>
     {{ $p->nama_perusahaan }}
 </td>
 
+
+
 <td>
     {{ $p->bidang_usaha }}
 </td>
+
+
+
+<td>
+    {{ $p->siswa_count }}
+    Siswa
+</td>
+
+
 
 <td>
 
@@ -49,19 +98,37 @@ Aksi
     Detail
 </a>
 
+
 </td>
 
+
 </tr>
+
+
+
 @empty
+
+
 <tr>
 
-<td colspan="3">
+<td colspan="5">
 
 Belum ada data perusahaan.
 
 </td>
+
 </tr>
+
+
 @endforelse
+
+
+
 </tbody>
+
+
 </table>
+
+
+
 @endsection

@@ -2,48 +2,126 @@
 
 
 @section('title')
-Detail Siswa
+    Detail Siswa PKL
 @endsection
 
 
 
 @section('content')
 
+
 <h2>
-Detail Siswa PKL
+    Detail Siswa PKL
 </h2>
 
 
-<table border="1" cellpadding="8">
+
+<table border="1" cellpadding="8" cellspacing="0">
+
 
 <tr>
-    <td>NIS</td>
+    <th>NIS</th>
     <td>
         {{ $siswa->nis }}
     </td>
 </tr>
 
 
+
 <tr>
-    <td>Nama</td>
+    <th>Nama Siswa</th>
     <td>
         {{ $siswa->nama }}
     </td>
 </tr>
 
 
+
 <tr>
-    <td>Kelas</td>
+    <th>Kelas</th>
     <td>
         {{ $siswa->kelas }}
     </td>
 </tr>
 
 
+
 <tr>
-    <td>Perusahaan</td>
+    <th>Perusahaan PKL</th>
     <td>
+
         {{ $siswa->perusahaan->nama_perusahaan ?? 'Belum Ada' }}
+
+    </td>
+</tr>
+
+
+
+<tr>
+    <th>Bidang Usaha</th>
+    <td>
+
+        {{ $siswa->perusahaan->bidang_usaha ?? '-' }}
+
+    </td>
+</tr>
+
+
+
+<tr>
+    <th>Tanggal Mulai PKL</th>
+    <td>
+
+        {{ $siswa->tanggal_mulai_pkl }}
+
+    </td>
+</tr>
+
+
+
+<tr>
+    <th>Tanggal Selesai PKL</th>
+    <td>
+
+        {{ $siswa->tanggal_selesai_pkl }}
+
+    </td>
+</tr>
+
+
+
+<tr>
+    <th>Status PKL</th>
+    <td>
+
+
+@if(now() < $siswa->tanggal_mulai_pkl)
+
+    <span style="color:blue;">
+        Belum Mulai PKL
+    </span>
+
+
+@elseif(
+    now() >= $siswa->tanggal_mulai_pkl &&
+    now() <= $siswa->tanggal_selesai_pkl
+)
+
+    <span style="color:green;">
+        Sedang PKL
+    </span>
+
+
+@else
+
+    <span style="color:gray;">
+        Selesai PKL
+    </span>
+
+
+@endif
+
+
     </td>
 </tr>
 
@@ -51,12 +129,22 @@ Detail Siswa PKL
 </table>
 
 
+
 <br>
 
 
-<a href="{{ route('siswa.index') }}">
-Kembali
+
+<a href="{{ route('siswa.edit',$siswa->id) }}">
+    Edit Data
 </a>
+
+
+|
+
+<a href="{{ route('siswa.index') }}">
+    Kembali
+</a>
+
 
 
 @endsection
